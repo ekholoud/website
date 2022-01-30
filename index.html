@@ -1,0 +1,405 @@
+<html> 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Empire State Building">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Covid 19</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link rel="stylesheet" href="Covid-19.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 4.3.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Castoro:400,400i">
+    <title>COVID-19</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="shortcut icon" href="assets/images/region.PNG" type="image/png">
+    <script src="leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="provincesnew.geojson" type="text/javascript"></script>
+    <script src="SelectLayers.js"></script>
+
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+    <meta name="theme-color" content="#73a3de">
+    <meta property="og:title" content="Covid 19">
+    <meta property="og:type" content="website">
+
+
+    
+	</head>
+    <style>
+         h1 {
+        border: 0.5px solid rgb(134, 126, 130);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 30px;
+        margin-left: 10px;
+        background-color: lightblue;
+        }
+        .legend {
+                    line-height: 18px;
+                    color: #555;
+                }
+                .legend i {
+                    width: 18px;
+                    height: 18px;
+                    float: left;
+                    margin-right: 8px;
+                    opacity: 0.7;
+                }
+                
+        #mymap {
+			width: 600px;
+			height: 400px;
+		}
+		.info {
+		    padding: 6px 8px;
+		    font: 14px/16px Arial, Helvetica, sans-serif;
+		    background: white;
+		    background: rgba(255,255,255,0.8);
+		    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		    border-radius: 5px;
+		}
+		.info h4 {
+		    margin: 0 0 5px;
+		    color: rgba(119, 119, 119, 0.918);
+            font-size: 1em;
+            font-weight: normal
+		}
+    </style>
+
+
+	
+<body>
+   <h2>
+    <div class="u-align-center u-container-style u-custom-color-2 u-group u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+          <h2 class="u-custom-font u-text u-text-palette-2-base u-text-1">
+            <span class="u-text-custom-color-1">COVID 19</span>
+            <span class="u-text-custom-color-1">
+              <br>Région Béni-Mellal Khénifra
+            </span>
+          </h2>
+          <p class="u-text u-text-palette-5-dark-2 u-text-2">Carte choroplèthe des nouveaux cas contaminés&nbsp;<br>Du 22/12/2021 au 28/12/2021
+          </p>
+        </div>
+      </div>
+    </h2>
+    
+
+    
+
+                    <div id="wrapper">
+                            <center><div id="mapid" style="width: 1300px; height: 500px;"></div></center>
+                            <div class="leaflet-top leaflet-right"><div class="info leaflet-control">
+                            <script src="SliderControl.js"></script>
+                                <script>
+                                var sliderControl = null;
+                                    var mymap = L.map('mapid').setView([32.31460907800695, -6.3589965716446315], 7);
+                                                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    }).addTo(mymap);
+
+                                    var info = L.control();
+                                    info.onAdd = function (mymap) {
+                                        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                                        this.update();
+                                        return this._div;
+                                    };
+
+                                    // method that we will use to update the control based on feature properties passed
+                                    info.update = function (p) {
+                                        this._div.innerHTML = '<h4>Cas contaminés par province : </h4>' + (p ?
+                                        'Province  : <b>' + p.Nom_Provin + '</b> <br />cas en % : ' + p.properties + ' .....</sup>'
+                                        :'');
+                                    };
+                                    info.addTo(mymap);
+
+
+
+                                    var popup = L.popup();
+                                    function getColor(e) {
+                                        return  e >4 ? '#99000d'  :
+                                                e >3 ? '#cb181d'  :
+                                                e >2 ? '#ef3b2c':
+                                                e >1 ? '#fb6a4a'  :
+                                                e >0 ? '#fc9272'  :
+                                                '#fcbba1'    ;
+
+                                    }
+
+
+                                    
+                                    function style7(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.te)
+                                        };
+                                    }
+                                    function style6(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.tsv)
+                                        };
+                                    }
+                                    function style5(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.ts)
+                                        };
+                                    }
+                                    function style4(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.tfv)
+                                        };
+                                    }
+                                    function style3(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.tf)
+                                        };
+                                    }
+                                    function style2(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.ttr)
+                                        };
+                                    }
+                                    function style1(feature) {
+                                        return {
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: '#636363',
+                                            dashArray: '0',
+                                            fillOpacity: 0.7,
+                                            fillColor: getColor(feature.properties.tt)
+                                        };
+                                    }
+                                    
+                                    function highlightFeature(e) {
+                                        var layer = e.target;
+
+                                        layer.setStyle({
+                                            weight: 5,
+                                            color: '#666',
+                                            dashArray: '',
+                                            fillOpacity: 0.7
+                                        });                   
+                                    }
+                                    
+                                    var geojson1;
+
+                                    function resetHighlight1(e) {
+                                        geojson1.resetStyle(e.target);
+                                        
+                                    }
+                                    var geojson2;
+
+                                    function resetHighlight2(e) {
+                                        geojson2.resetStyle(e.target);
+                                        
+                                    }
+                                    var geojson3;
+
+                                    function resetHighlight3(e) {
+                                        geojson3.resetStyle(e.target);
+                                    
+                                    var geojson4;  
+                                    }
+                                    function resetHighlight4(e) {
+                                        geojson4.resetStyle4(e.target);
+                                        
+                                    }
+                                    var geojson5;
+
+                                    function resetHighlight5(e) {
+                                        geojson5.resetStyle(e.target);
+                                        
+                                    }
+                                    var geojson6;
+
+                                    function resetHighlight6(e) {
+                                        geojson6.resetStyle(e.target);
+                                        
+                                    var geojson7;
+                                    }  function resetHighlight7(e) {
+                                        geojson7.resetStyle(e.target);
+                                        
+                                    }
+
+                                    
+                                    
+                        
+                                    function zoomToFeature(e) {
+                                        mymap.fitBounds(e.target.getBounds());
+                                    }
+
+                                    function onEachFeature1(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight1,
+                                            click: zoomToFeature
+                                        });
+                                    }
+                                    function onEachFeature2(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight2,
+                                            click: zoomToFeature
+                                        });
+                                    }
+                                    function onEachFeature3(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight3,
+                                            click: zoomToFeature
+                                        });
+                                    }
+                                    
+                                    function onEachFeature4(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight4,
+                                            click: zoomToFeature
+                                        });
+                                    }
+                                    function onEachFeature5(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight5,
+                                            click: zoomToFeature
+                                        });
+                                    }
+                                    function onEachFeature6(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight6,
+                                            click: zoomToFeature
+                                        });
+                                    }                
+                                    function onEachFeature7(feature, layer) {
+                                        layer.on({
+                                            mouseover: highlightFeature,
+                                            mouseout: resetHighlight7,
+                                            click: zoomToFeature
+                                        });
+
+                                    }
+                                    
+
+
+                                    geojson1 = L.geoJson(NouveauxCas,{style: style1, onEachFeature: onEachFeature1, time: "Le 22/12/2021"
+                                            }
+                                    );
+                                    geojson2 = L.geoJson(NouveauxCas,{style: style2, onEachFeature: onEachFeature2, time: "Le 23/12/2021"
+                                            }
+                                    );
+                                    geojson3 = L.geoJson(NouveauxCas,{style: style3, onEachFeature: onEachFeature3, time: "Le 24/12/2021"
+                                            }
+                                    );
+                                    geojson4 = L.geoJson(NouveauxCas,{style: style4, onEachFeature: onEachFeature4, time: "Le 25/12/2021"
+                                            }
+                                    );
+                                    geojson5 = L.geoJson(NouveauxCas,{style: style5, onEachFeature: onEachFeature5, time: "Le 26/12/2021"
+                                            }
+                                    );
+                                    geojson6 = L.geoJson(NouveauxCas,{style: style6, onEachFeature: onEachFeature6, time: "Le 27/12/2021"
+                                            }
+                                    );
+                                    geojson7 = L.geoJson(NouveauxCas,{style: style7, onEachFeature: onEachFeature7, time: "Le 28/12/2021"
+                                            }
+                                    );
+                                    
+                                    
+
+                                    // slider 		
+                                    
+                                    layerGroup = L.layerGroup([geojson1, geojson2, geojson3, geojson4, geojson5, geojson6, geojson7]);
+                                    var sliderControl = L.control.sliderControl({layer:layerGroup, follow: true});
+                                    mymap.addControl(sliderControl);
+                                    sliderControl.startSlider();
+                        
+                                   
+                                    //////
+                                    //////////////
+
+
+
+
+
+                                    ////////////////
+                                    
+
+
+
+
+
+
+
+
+                                    
+                                    // légende /////
+                                    var legend = L.control({position: 'bottomright'});
+
+                                    legend.onAdd = function (mymap) {
+
+                                        var div = L.DomUtil.create('div', 'info legend'),
+                                            grades = [0, 1, 2, 3, 4,5],
+                                            labels = [];
+
+                                        for (var i = 0; i < grades.length; i++) {
+                                            div.innerHTML +=
+                                                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                                                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                                        }
+
+                                        return div;
+                                    };
+
+                                    legend.addTo(mymap);
+
+
+                                    
+                                </script>
+
+</body>
+</html>
