@@ -3,8 +3,8 @@
 "name": "Covid",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "FID_": 0, "Id": 12, "Nom": "Dakhla-Oued Ed Daha", "1": 6, "2": 14, "Lon": -14.35745899, "Lat": 22.87426382 }, "geometry": { "type": "Point", "coordinates": [ -14.35745899, 22.87426382 ] } },
-{ "type": "Feature", "properties": { "FID_": 1, "Id": 11, "Nom": "Laâyoune-Sakia El Hamra​​", "1": 8, "2": 8, "Lon": -11.98007363, "Lat": 26.31166373 }, "geometry": { "type": "Point", "coordinates": [ -11.98007363, 26.31166373 ] } },
+{ "type": "Feature", "properties": { "FID_": 0, "Id": 12, "Nom": "Dakhla-Oued Ed Daha", "1": 0, "2": 4981, "Lon": -14.35745899, "Lat": 22.87426382 }, "geometry": { "type": "Point", "coordinates": [ -14.35745899, 22.87426382 ] } },
+{ "type": "Feature", "properties": { "FID_": 1, "Id": 11, "Nom": "Laâyoune-Sakia El Hamra​​", "1": 10055, "2": 3853, "Lon": -11.98007363, "Lat": 26.31166373 }, "geometry": { "type": "Point", "coordinates": [ -11.98007363, 26.31166373 ] } },
 { "type": "Feature", "properties": { "FID_": 2, "Id": 10, "Nom": "Guelmim Oued Noun​​", "1": 3, "2": 3, "Lon": -9.927172874, "Lat": 28.31018651 }, "geometry": { "type": "Point", "coordinates": [ -9.927172874, 28.31018651 ] } },
 { "type": "Feature", "properties": { "FID_": 3, "Id": 9, "Nom": "Souss-Massa", "1": 37, "2": 39, "Lon": -8.354625122, "Lat": 29.9153702 }, "geometry": { "type": "Point", "coordinates": [ -8.354625122, 29.9153702 ] } },
 { "type": "Feature", "properties": { "FID_": 4, "Id": 8, "Nom": "Darâa-Tafilalet", "1": 14, "2": 14, "Lon": -5.36896652, "Lat": 31.19112059 }, "geometry": { "type": "Point", "coordinates": [ -5.36896652, 31.19112059 ] } },
